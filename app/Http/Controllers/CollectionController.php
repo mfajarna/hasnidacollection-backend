@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CollectionRequest;
 use App\Models\Collection;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,7 @@ class CollectionController extends Controller
      */
     public function create()
     {
-        //
+        return view('collection.create');
     }
 
     /**
@@ -37,9 +38,14 @@ class CollectionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CollectionRequest $request)
     {
-        //
+         $data = $request->all();
+         $data['picturePath'] = $request->file('picturePath')->store('assets/food', 'public');
+
+         Collection::create($data);
+
+         return redirect()->route('collection.index');
     }
 
     /**
@@ -82,8 +88,10 @@ class CollectionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Collection $collection)
     {
-        //
+        $collection->delete();
+
+        return redirect()->route('collection.index');
     }
 }
