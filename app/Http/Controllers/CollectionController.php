@@ -65,9 +65,11 @@ class CollectionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Collection $collection)
     {
-        //
+        return view('collection.edit', [
+            'item' => $collection
+        ]);
     }
 
     /**
@@ -77,9 +79,17 @@ class CollectionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Collection $collection)
     {
-        //
+        $data = $request->all();
+
+        if($request->file('picturePath'))
+        {
+            $data['picturePath'] = $request->file('picturePath')->store('assets/food', 'public');
+        }
+
+        $collection->update($data);
+        return redirect()->route('collection.index');
     }
 
     /**
