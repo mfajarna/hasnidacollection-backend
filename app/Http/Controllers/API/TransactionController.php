@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\Transaction;
+use Exception;
 use Illuminate\Http\Request;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
+use App\Models\Transaksi;
 use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
@@ -20,7 +21,7 @@ class TransactionController extends Controller
 
         if($id)
         {
-            $transaction = Transaction::with(['collection','user'])->find($id);
+            $transaction = Transaksi::with(['collection','user'])->find($id);
 
             if($transaction)
             {
@@ -37,7 +38,7 @@ class TransactionController extends Controller
             }
         }
 
-        $transaction = Transaction::with(['collection','user'])
+        $transaction = Transaksi::with(['collection','user'])
                                     ->where('user_id', Auth::user()->id);
 
         if($collection_id)
@@ -57,10 +58,43 @@ class TransactionController extends Controller
 
     public function update(Request $request, $id)
     {
-        $transaction = Transaction::findOrFail($id);
+        $transaction = Transaksi::findOrFail($id);
 
         $transaction->update($request->all());
 
         return ResponseFormatter::success($transaction, 'Transaksi berhasil diubah');
     }
+     public function checkout(Request $request)
+    {
+        try {
+        $request->validate([
+            'collection_id' => 'required|exists:collections,id',
+            'user_id' => 'required|exists:users,id',
+            'quantity' => 'required',
+            'total' => 'required',
+            'jasa' => 'required',
+            'no_transaksi' => 'required|string',
+            'no_resi' => 'string',
+            'status' => 'required',
+        ]);
+
+        $transaction = Transaksi::create([
+            'collection_id' => $request->collection_id,
+            'user_id' => $request->user_id,
+            'quantity' => $request->quantity,
+            'total' => $request->total,
+            'status' => $request->status,
+            'no_transaksi' => $request->no_transaksi,
+            'jasa' => $request->jasa,
+            'no_resi' => $request->no_resi
+
+        ]);
+        $transaction = Transaksi::with(['collection','user'])->find($transaction->id);
+            return ResponseFormatter::success($transaction,'Transaksi berhasil');
+
+        }catch (Exception $e) {
+            return ResponseFormatter::error($e->getMessage(),'Transaksi Gagal');
+        }
+    }
+
 }

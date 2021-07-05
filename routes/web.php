@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +27,12 @@ Route::prefix('dashboard')
             Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
             Route::resource('users', UsersController::class);
             Route::resource('collection', CollectionController::class);
+            Route::resource('transaction', TransactionController::class);
+             Route::get('transactions/{id}/status/{status}', [TransactionController::class, 'changeStatus'])
+            ->name('transactions.changeStatus');
+
         });
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');

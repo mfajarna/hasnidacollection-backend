@@ -16,7 +16,7 @@
 
     <div class="p-6 border-t border-gray-200">
         <div class="flex items-center">
-            <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold"><a href="https://tailwindcss.com/">Transaction</a></div>
+            <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold"><a href="{{ route('transaction.index') }}">Transaction</a></div>
         </div>
     </div>
 

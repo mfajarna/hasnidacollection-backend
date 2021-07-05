@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Transaction extends Model
+class Transaksi extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $fillable = [
-        'collection_id', 'user_id', 'quantity', 'total', 'status', 'no_resi'
+        'collection_id', 'user_id', 'quantity', 'total', 'status', 'no_resi','no_transaksi','jasa'
     ];
 
     public function collection()
@@ -35,3 +35,4 @@ class Transaction extends Model
         return Carbon::parse($value)->timestamp;
     }
 }
+

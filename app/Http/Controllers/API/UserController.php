@@ -65,6 +65,8 @@ class UserController extends Controller
                 'houseNumber' => 'required|string',
                 'phoneNumber' => 'required|string',
                 'city' => 'required|string',
+                'postal_code' => 'required|integer',
+                'kecamatan' => 'required|string|max:255'
             ]);
 
             $user = User::create([
@@ -75,6 +77,8 @@ class UserController extends Controller
                 'houseNumber' => $data['houseNumber'],
                 'phoneNumber' => $data['phoneNumber'],
                 'city' => $data['city'],
+                'postal_code' => $data['postal_code'],
+                'kecamatan' => $data['kecamatan']
             ]);
 
             $tokenResult = $user->createToken('authToken')->plainTextToken;
@@ -114,30 +118,26 @@ class UserController extends Controller
         return ResponseFormatter::success($user, 'Profile updated');
     }
 
-    public function updatePhoto(Request $request)
+     public function updatePhoto(Request $request)
     {
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'file' => 'required|image|max:2048',
         ]);
 
-        if($validator->fails())
-        {
-            return ResponseFormatter::error(
-                ['error' => $validator->errors()],
-                'Update photo fails',
-                401
-            );
+        if ($validator->fails()) {
+            return ResponseFormatter::error(['error'=>$validator->errors()], 'Update Photo Fails', 401);
         }
 
-        if($request->file('file'))
-        {
-            $file = $request->file->store('assets/user','public');
+        if ($request->file('file')) {
 
+            $file = $request->file->store('assets/user', 'public');
+
+            //store your file into database
             $user = Auth::user();
             $user->profile_photo_path = $file;
             $user->update();
 
-            return ResponseFormatter::success(['file'], 'File Successfully Update');
+            return ResponseFormatter::success([$file],'File successfully uploaded');
         }
     }
 
