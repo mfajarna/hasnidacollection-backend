@@ -78,4 +78,27 @@ class CollectionController extends Controller
             'Data List Berhasil Di Ambil!'
         );
     }
+    
+    public function changeStock(Request $request, $id)
+    {
+        $collection = Collection::findOrFail($id);
+        
+        $collection->stock = $request->stock;
+        $collection->save();
+        
+            if($collection)
+            {
+                return ResponseFormatter::success(
+                    $collection,
+                    'Stock berhasil diubah'
+                );
+            }else{
+                return ResponseFormatter::error([
+                    null,
+                    'Data Produk Tidak Ada',
+                    404
+                ]);
+            }
+    }
+    
 }
