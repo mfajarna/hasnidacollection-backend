@@ -42,6 +42,7 @@ class CollectionController extends Controller
     {
          $data = $request->all();
          $data['picturePath'] = $request->file('picturePath')->store('assets/food', 'public');
+         $data['photoBarcode'] = $request->file('photoBarcode')->store('assets/food', 'public');
 
          Collection::create($data);
 
@@ -86,6 +87,10 @@ class CollectionController extends Controller
         if($request->file('picturePath'))
         {
             $data['picturePath'] = $request->file('picturePath')->store('assets/food', 'public');
+        }
+        if($request->file('photoBarcode'))
+        {
+            $data['photoBarcode'] = $request->file('picturePath')->store('assets/food', 'public');
         }
 
         $collection->update($data);

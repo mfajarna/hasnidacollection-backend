@@ -78,14 +78,14 @@ class CollectionController extends Controller
             'Data List Berhasil Di Ambil!'
         );
     }
-    
+
     public function changeStock(Request $request, $id)
     {
         $collection = Collection::findOrFail($id);
-        
+
         $collection->stock = $request->stock;
         $collection->save();
-        
+
             if($collection)
             {
                 return ResponseFormatter::success(
@@ -100,5 +100,5 @@ class CollectionController extends Controller
                 ]);
             }
     }
-    
+
 }
