@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -26,7 +27,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','address','city','houseNumber','phoneNumber','postal_code','kecamatan'
     ];
 
     /**
@@ -58,4 +59,15 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function getCreatedAtAttribute($created_at)
+    {
+        return Carbon::parse($created_at)
+            ->getPreciseTimestamp(3);
+    }
+    public function getUpdatedAtAttribute($updated_at)
+    {
+        return Carbon::parse($updated_at)
+            ->getPreciseTimestamp(3);
+    }
 }

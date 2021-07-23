@@ -16,6 +16,28 @@ class UserController extends Controller
 {
     use PasswordValidationRules;
 
+    public function all(Request $request)
+    {
+
+        $roles = $request->input('roles');
+        $limit = $request->input('limit', 200);
+
+        $users = User::query();
+
+        if($roles)
+        {
+            $users->where('roles', 'like', '%'. $roles . '%');
+        }
+
+        return ResponseFormatter::success(
+            $users->paginate($limit),
+            'Data List User Berhasil Di Ambil!'
+        );
+
+
+
+    }
+
     public function login(Request $request){
      try{
         $request->validate([

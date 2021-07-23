@@ -56,26 +56,26 @@ class TransactionController extends Controller
             'Data List transaksi Berhasil Di Ambil!'
         );
     }
-    
+
     public function fetch(Request $request)
     {
-       
+
         $status = $request->input('status');
         $limit = $request->input('limit', 100);
-        
+
          $transaksi = Transaksi::with(['collection','user']);
-        
+
          if($status)
         {
             $transaksi->where('status', 'like', '%'. $status . '%');
         }
-        
+
         return ResponseFormatter::success(
             $transaksi->paginate($limit),
             'Data List Transaksi Berhasil Di Ambil!'
         );
-        
-        
+
+
     }
 
     public function update(Request $request, $id)
@@ -116,18 +116,18 @@ class TransactionController extends Controller
             return ResponseFormatter::error($e->getMessage(),'Transaksi Gagal');
         }
     }
-    
+
      public function getPastOrders(Request $request)
      {
          $id = $request->input('id');
         $limit = $request->input('limit', 100);
         $collection_id = $request->input('collection_id');
         $status = $request->input('status');
-        
+
         if($id)
         {
             $transaction = Transaksi::with(['collection','user'])->find($id);
-            
+
             if($transaction)
             {
                 return ResponseFormatter::success(
@@ -141,9 +141,9 @@ class TransactionController extends Controller
                     404
                 ]);
             }
-            
+
         }
-        
+
         $transaction = Transaksi::with(['collection','user'])
                                     ->where('user_id', Auth::user()->id)->whereIn('status', ['DONE']);
 
@@ -161,7 +161,7 @@ class TransactionController extends Controller
             'Data List transaksi!'
         );
      }
-     
+
      public function updatePhotoPembayaran(Request $request, $id)
      {
 
@@ -172,21 +172,21 @@ class TransactionController extends Controller
         if ($validator->fails()) {
             return ResponseFormatter::error(['error'=>$validator->errors()], 'Update Photo Fails', 401);
         }
-        
+
         if ($request->file('file')) {
 
             $file = $request->file->store('assets/user', 'public');
 
             //store your file into database
-    
+
             $transaksi = Transaksi::find($id);
             $transaksi->pembayaranPath = $file;
             $transaksi->update();
 
             return ResponseFormatter::success([$file],'File successfully uploaded');
         }
-        
-        
+
+
      }
 
 }

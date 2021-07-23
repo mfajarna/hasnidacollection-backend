@@ -13,7 +13,7 @@ class Collection extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable =[
-        'name','description','stock', 'price', 'rate', 'types', 'category','picturePath'
+        'name','description','stock', 'price', 'rate', 'types', 'category','picturePath','url_barcode','photoBarcode'
     ];
 
     public function getCreatedAtAttribute($value)
@@ -29,6 +29,7 @@ class Collection extends Model
     public function toArray(){
         $toArray = parent::toArray();
         $toArray['picturePath'] = $this->picturePath;
+        $toArray['photoBarcode'] = $this->photoBarcode;
 
         return $toArray;
     }
@@ -36,5 +37,10 @@ class Collection extends Model
     public function getPicturePathAttribute()
     {
         return url('') . Storage::url($this->attributes['picturePath']);
+    }
+
+    public function getPhotoBarcodeAttribute()
+    {
+        return url('') . Storage::url($this->attributes['photoBarcode']);
     }
 }
