@@ -24,6 +24,7 @@ class CreateTransaksisTable extends Migration
             $table->integer('jasa');
             $table->integer('total');
             $table->string('status');
+            $table->string('photo_pembayaran_path', 2048);
 
             $table->timestamps();
         });

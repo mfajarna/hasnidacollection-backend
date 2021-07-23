@@ -22,6 +22,7 @@
                         <th class="border px-6 py-4">Price</th>
                         <th class="border px-6 py-4">Rate</th>
                         <th class="border px-6 py-4">Types</th>
+                        <th class="border px-6 py-4">Category</th>
                         <th class="border px-6 py-4">Action</th>
                     </tr>
                     </thead>
@@ -34,6 +35,7 @@
                                 <td class="border px-6 py-4">{{ number_format($item->price) }}</td>
                                 <td class="border px-6 py-4">{{ $item->rate }}</td>
                                 <td class="border px-6 py-4">{{ $item->types }}</td>
+                                <td class="border px-6 py-4">{{ $item->category }}</td>
                                 <td class="border px-6 py- text-center">
                                     <a href="{{ route('collection.edit', $item->id) }}" class="inline-block text-blue-500 font-bold py-2 px-4 mx-2 rounded">
                                         Edit
@@ -48,7 +50,7 @@
                             </tr>
                         @empty
                             <tr>
-                               <td colspan="6" class="border text-center p-5">
+                               <td colspan="8" class="border text-center p-5">
                                    Data Tidak Ditemukan
                                </td>
                             </tr>

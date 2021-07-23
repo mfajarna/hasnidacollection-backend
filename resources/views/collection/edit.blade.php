@@ -6,9 +6,9 @@
     </x-slot>
 
     <?php
-    
-    
-    
+
+
+
     ?>
 
     <div class="py-12">
@@ -101,6 +101,7 @@
                                 <option value="PAKAIAN">PAKAIAN</option>
                                 <option value="HEELS">HEELS</option>
                                 <option value="TAS">TAS</option>
+                                <option value="BEAUTY">BEAUTY CARE</option>
                             </select>
                         </div>
                     </div>

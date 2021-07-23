@@ -24,6 +24,8 @@ class CreateCollectionsTable extends Migration
             $table->string('types')->nullable();
             $table->string('category')->nullable();
             $table->string('picturePath')->nullable();
+            $table->string('url_barcode')->nullable();
+            $table->string('photoBarcode')->nullable();
 
             $table->softDeletes();
             $table->timestamps();
