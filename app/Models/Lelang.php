@@ -11,7 +11,7 @@ class Lelang extends Model
     use HasFactory;
 
     public $filable = [
-        'collection_id', 'time', 'bid'
+        'collection_id', 'time', 'bid','status'
     ];
 
     public function collection()

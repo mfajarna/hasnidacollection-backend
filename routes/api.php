@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\CollectionController;
+use App\Http\Controllers\API\LelangController;
 use App\Http\Controllers\API\TransactionController;
 
 /*
@@ -31,6 +32,9 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::post('checkout', [TransactionController::class, 'checkout']);
     Route::post('collection/{id}', [CollectionController::class,'changeStock']);
+
+    Route::post('lelang', [LelangController::class, 'create']);
+    Route::get('fetchLelang', [LelangController::class, 'fetch']);
 });
 
 
