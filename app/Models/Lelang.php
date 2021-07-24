@@ -11,12 +11,12 @@ class Lelang extends Model
     use HasFactory;
 
     public $filable = [
-        'collection_id', 'time', 'bid','status'
+        'id_collection', 'time', 'bid','status'
     ];
 
     public function collection()
     {
-        return $this->hasOne(Collection::class, 'id', 'collection_id');
+        return $this->hasOne(Collection::class, 'id', 'id_collection');
     }
 
     public function getCreatedAtAttribute($created_at)

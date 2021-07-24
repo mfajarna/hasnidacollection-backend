@@ -15,14 +15,14 @@ class LelangController extends Controller
         try
         {
             $request->validate([
-                'collection_id' => 'required|exists:lelangs,id',
+                'id_collection' => 'required|exists:lelangs,id',
                 'time' => 'required|integer',
                 'bid' => 'required|integer',
                 'status' => 'required|string',
             ]);
 
             $lelang = Lelang::create([
-                'collection_id' => $request->collection_id,
+                'id_collection' => $request->id_collection,
                 'time' => $request->time,
                 'bid' => $request->bid,
                 'status' => $request->status
