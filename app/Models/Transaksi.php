@@ -45,8 +45,8 @@ class Transaksi extends Model
             ->getPreciseTimestamp(3);
     }
 
-    public function getpembayaranPathhAttribute()
+    public function getPembayaranPathAttribute()
     {
-        return config('app.url') . Storage::url($this->attributes['pembayaranPath']);
+        return url('') . Storage::url($this->attributes['pembayaranPath']);
     }
 }
