@@ -12,6 +12,9 @@
                     <div class="w-full md:w-1/6 px-4 mb-4 md:mb-0">
                         <img src="{{ $item->collection->picturePath }}" alt="" class="w-60 h-60 rounded">
                     </div>
+                    <div class="w-full md:w-1/6 px-4 mb-4 md:mb-0">
+                        <img src="{{ $item->pembayaranPath }}" alt="" class="w-60 h-60 rounded">
+                    </div>
                     <div class="w-full md:w-5/6 px-4 mb-4 md:mb-0">
                         <div class="flex flex-wrap mb-3">
                             <div class="w-2/6">
