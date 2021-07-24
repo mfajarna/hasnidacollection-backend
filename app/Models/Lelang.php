@@ -10,7 +10,7 @@ class Lelang extends Model
 {
     use HasFactory;
 
-    public $filable = [
+    public $fillable = [
         'id_collection', 'time', 'bid','status'
     ];
 
