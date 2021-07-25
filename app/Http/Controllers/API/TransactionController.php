@@ -119,7 +119,7 @@ class TransactionController extends Controller
 
      public function getPastOrders(Request $request)
      {
-         $id = $request->input('id');
+        $id = $request->input('id');
         $limit = $request->input('limit', 100);
         $collection_id = $request->input('collection_id');
         $status = $request->input('status');
