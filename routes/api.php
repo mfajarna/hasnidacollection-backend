@@ -35,6 +35,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::post('lelang', [LelangController::class, 'create']);
     Route::get('fetchLelang', [LelangController::class, 'fetch']);
+    Route::get('lelang/{id}', [LelangController::class, 'changeStatus']);
 });
 
 

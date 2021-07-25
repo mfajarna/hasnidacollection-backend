@@ -54,4 +54,26 @@ class LelangController extends Controller
             'Data list lelang berhasil diambil'
         );
     }
+
+    public function changeStatus(Request $request, $id)
+    {
+        $lelang = Lelang::findOrFail($id);
+
+        $lelang->status = $request->status;
+        $lelang->save();
+
+        if($lelang)
+        {
+            return ResponseFormatter::success(
+                $lelang,
+                'Berhasil Mengubah Status'
+            );
+        }else{
+            return ResponseFormatter::error([
+                null,
+                'Data tidak ada',
+                404
+            ]);
+        }
+    }
 }
