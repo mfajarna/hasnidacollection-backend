@@ -45,8 +45,8 @@ class LelangController extends Controller
 
         if($status)
         {
-            // $lelang->where('status', 'like', '%'. $status . '%');
-            $lelang->where('status', $status);
+            $lelang->where('status', 'like', '%'. $status . '%')->orderBy('id', 'DESC')->first();
+
         }
 
         return responseFormatter::success(
