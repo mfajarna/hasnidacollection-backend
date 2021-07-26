@@ -82,7 +82,7 @@ class LelangdetailController extends Controller
     {
         $limit = $request->input('limit', 40);
 
-        $lelangDetail = Lelangdetail::with(['lelang','user'])->where('jumlah_bid', 'ASC')->first();
+        $lelangDetail = Lelangdetail::with(['lelang','user'])->orderBy('jumlah_bid', 'asc')->first();
 
         return ResponseFormatter::success(
             $lelangDetail->paginate($limit),
