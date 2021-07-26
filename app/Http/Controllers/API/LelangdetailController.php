@@ -60,7 +60,7 @@ class LelangdetailController extends Controller
         }
 
         $lelang = Lelangdetail::with(['collection','user'])
-                                    ->where('user_id', Auth::user()->id);
+                                    ->where('id_users', Auth::user()->id);
 
         if($jumlah_bid)
         {
