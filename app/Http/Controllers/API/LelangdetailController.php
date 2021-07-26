@@ -78,4 +78,16 @@ class LelangdetailController extends Controller
         );
     }
 
+    public function getPemenangLelang(Request $request)
+    {
+        $limit = $request->input('limit', 40);
+
+        $lelangDetail = Lelangdetail::with(['lelang','user'])->where('jumlah_bid', 'ASC')->first();
+
+        return ResponseFormatter::success(
+            $lelangDetail->paginate($limit),
+            'Data List transaksi Berhasil Di Ambil!'
+        );
+    }
+
 }

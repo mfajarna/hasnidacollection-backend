@@ -40,6 +40,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::get('dataLelang', [LelangdetailController::class,'all']);
     Route::post('prosesLelang', [LelangdetailController::class, 'prosesLelang']);
+    Route::get('getPemenang', [LelangDetailController::class, 'getPemenangLelang']);
 });
 
 
