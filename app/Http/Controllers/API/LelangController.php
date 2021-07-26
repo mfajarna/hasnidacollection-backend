@@ -16,7 +16,7 @@ class LelangController extends Controller
         {
             $request->validate([
                 'id_collection' => 'required|exists:collections,id',
-                'time' => 'required|integer',
+                'time' => 'integer',
                 'bid' => 'required|integer',
                 'status' => 'required|string',
             ]);
