@@ -39,8 +39,7 @@ class TransactionController extends Controller
             }
         }
 
-        $transaction = Transaksi::with(['collection','user'])
-                                    ->where('user_id', Auth::user()->id);
+        $transaction = Transaksi::with(['collection','user']);
 
         if($collection_id)
         {
