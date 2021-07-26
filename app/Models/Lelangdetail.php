@@ -13,12 +13,12 @@ class Lelangdetail extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_collection', 'id_users','jumlah_bid'
+        'id_lelang', 'id_users','jumlah_bid'
     ];
 
-    public function collection()
+    public function lelang()
     {
-        return $this->hasOne(Collection::class, 'id', 'id_collection');
+        return $this->hasOne(Lelang::class, 'id', 'id_lelang');
     }
 
     public function user()

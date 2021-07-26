@@ -16,7 +16,7 @@ class CreateLelangdetailsTable extends Migration
         Schema::create('lelangdetails', function (Blueprint $table) {
             $table->id();
             $table->integer('id_users');
-            $table->integer('id_collection');
+            $table->integer('id_lelang');
             $table->integer('jumlah_bid');
             $table->timestamps();
         });

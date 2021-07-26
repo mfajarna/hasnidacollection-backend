@@ -16,18 +16,18 @@ class LelangdetailController extends Controller
 
         try{
             $request->validate([
-                'id_collection' => 'required|exists:collections,id',
+                'id_lelang' => 'required|exists:lelangs,id',
                 'id_users' => 'required|exists:users,id',
                 'jumlah_bid' => 'required|integer'
             ]);
 
-            $lelang = Lelangdetail::create([
-                'id_collection' => $request->id_collection,
+            $lelangDetail = Lelangdetail::create([
+                'id_lelang' => $request->id_lelang,
                 'id_users' => $request->id_users,
                 'jumlah_bid' => $request->jumlah_bid
             ]);
-            $lelang = Lelangdetail::with(['collection','user'])->find($lelang->id);
-            return ResponseFormatter::success($lelang,'Lelang Proses berhasil');
+            $lelangDetail = Lelangdetail::with(['lelang','user'])->find($lelangDetail->id);
+            return ResponseFormatter::success($lelangDetail,'Lelang Proses berhasil');
 
         }catch (Exception $e) {
             return ResponseFormatter::error($e->getMessage(),'Transaksi Gagal');
@@ -36,18 +36,20 @@ class LelangdetailController extends Controller
     public function all(Request $request)
     {
         $id = $request->input('id');
+        $id_users = $request->input('id_users');
+        $id_lelang = $request->input('id_lelang');
         $limit = $request->input('limit', 100);
         $jumlah_bid = $request->input('jumlah_bid');
 
 
         if($id)
         {
-            $lelang = Lelangdetail::with(['collection','user'])->find($id);
+            $lelangDetail = Lelangdetail::with(['collection','user'])->find($id);
 
-            if($lelang)
+            if($lelangDetail)
             {
                 return ResponseFormatter::success(
-                    $lelang,
+                    $lelangDetail,
                     'Data Lelang Berhasil Di Ambil'
                 );
             }else{
@@ -59,14 +61,19 @@ class LelangdetailController extends Controller
             }
         }
 
-        $lelang = Lelangdetail::with(['collection','user']);
+        $lelangDetail = Lelangdetail::with(['lelang','user']);
+
+        if($id_lelang)
+        {
+            $lelangDetail->where('id_lelang', $id_lelang);
+        }
 
         if($jumlah_bid)
         {
-            $lelang->where('jumlah_bid', $jumlah_bid);
+            $lelangDetail->where('jumlah_bid', $jumlah_bid);
         }
         return ResponseFormatter::success(
-            $lelang->paginate($limit),
+            $lelangDetail->paginate($limit),
             'Data List transaksi Berhasil Di Ambil!'
         );
     }
