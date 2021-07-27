@@ -98,6 +98,7 @@ class TransactionController extends Controller
             'no_transaksi' => 'string',
             'no_resi' => 'string',
             'status' => 'required',
+            'status_tukar_barang' => 'required|string'
         ]);
 
         $transaction = Transaksi::create([
@@ -107,7 +108,8 @@ class TransactionController extends Controller
             'total' => $request->total,
             'status' => $request->status,
             'no_transaksi' => $request->no_transaksi,
-            'no_resi' => $request->no_resi
+            'no_resi' => $request->no_resi,
+            'status_tukar_barang' => $request->status_tukar_barang
 
         ]);
         $transaction = Transaksi::with(['collection','user'])->find($transaction->id);
