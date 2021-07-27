@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Validation\Validator;
 
 class LelangdetailController extends Controller
 {
@@ -17,16 +18,18 @@ class LelangdetailController extends Controller
         try{
             $request->validate([
                 'id_lelang' => 'required|exists:lelangs,id',
+                'id_collection' => 'required|exists:collections,id',
                 'id_users' => 'required|exists:users,id',
                 'jumlah_bid' => 'required|integer'
             ]);
 
             $lelangDetail = Lelangdetail::create([
                 'id_lelang' => $request->id_lelang,
+                'id_collection' => $request->id_collection,
                 'id_users' => $request->id_users,
                 'jumlah_bid' => $request->jumlah_bid
             ]);
-            $lelangDetail = Lelangdetail::with(['lelang','user'])->find($lelangDetail->id);
+            $lelangDetail = Lelangdetail::with(['lelang','user','collection'])->find($lelangDetail->id);
             return ResponseFormatter::success($lelangDetail,'Lelang Proses berhasil');
 
         }catch (Exception $e) {
@@ -44,7 +47,7 @@ class LelangdetailController extends Controller
 
         if($id)
         {
-            $lelangDetail = Lelangdetail::with(['collection','user'])->find($id);
+            $lelangDetail = Lelangdetail::with(['collection','user','lelang'])->find($id);
 
             if($lelangDetail)
             {
@@ -61,7 +64,7 @@ class LelangdetailController extends Controller
             }
         }
 
-        $lelangDetail = Lelangdetail::with(['lelang','user']);
+        $lelangDetail = Lelangdetail::with(['lelang','user','collection']);
 
         if($id_lelang)
         {
@@ -83,7 +86,7 @@ class LelangdetailController extends Controller
         $limit = $request->input('limit', 100);
         $id_lelang = $request->input('id_lelang');
 
-        $lelangDetail = Lelangdetail::with(['lelang','user'])->where('id_lelang', 'like', '%'. $id_lelang . '%')->orderBy('jumlah_bid', 'desc');
+        $lelangDetail = Lelangdetail::with(['lelang','user','collection'])->where('id_lelang', 'like', '%'. $id_lelang . '%')->orderBy('jumlah_bid', 'desc');
 
 
         return ResponseFormatter::success(
