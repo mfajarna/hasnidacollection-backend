@@ -44,6 +44,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('getPemenang', [LelangDetailController::class, 'getPemenangLelang']);
 
     Route::post('tukarBarang', [TukarbarangController::class,'create']);
+    Route::post('buktiBayar/{id}', [TukarbarangController::class,'updateBuktiPhoto']);
 });
 
 

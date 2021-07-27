@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Helpers\ResponseFormatter;
 use Exception;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Tukarbarang;
+use Illuminate\Http\Request;
+use App\Helpers\ResponseFormatter;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class TukarbarangController extends Controller
 {
@@ -35,5 +36,30 @@ class TukarbarangController extends Controller
         {
              return ResponseFormatter::error($e->getMessage(),'Transaksi Gagal');
         }
+    }
+
+    public function updateBuktiPhoto(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'file' => 'required|image:jpeg,png,jpg|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return ResponseFormatter::error(['error'=>$validator->errors()], 'Update Photo Fails', 401);
+        }
+
+        if ($request->file('file')) {
+
+            $file = $request->file->store('assets/user', 'public');
+
+            //store your file into database
+
+            $transaksi = Tukarbarang::find($id);
+            $transaksi->buktiPhoto = $file;
+            $transaksi->update();
+
+            return ResponseFormatter::success([$file],'File successfully uploaded');
+        }
+
     }
 }
