@@ -17,25 +17,20 @@ class TukarbarangController extends Controller
                 'id_collection' => 'required|exists:collections,id',
                 'id_users' => 'required|exists:users,id',
                 'alasan_tukar_barang' => 'required|string',
-                'file' => 'image:jpeg,png,jpg|max:2048',
                 'status' => 'required|string'
             ]);
 
-            if($request->file('file'))
-            {
-                $file = $request->file->store('assets/user', 'public');
 
                 $tukarBarang = Tukarbarang::create([
                     'id_collection' => $request->id_collection,
                     'id_users' => $request->id_users,
                     'alasan_tukar_barang' => $request->alasan_tukar_barang,
-                    'file' => $file,
                     'status' => $request->status
                 ]);
 
                 $tukarBarang = Tukarbarang::with(['collection','users'])->find($tukarBarang->id);
                     return ResponseFormatter::success($tukarBarang, 'Berhasil input tukar barang');
-            }
+
         }catch(Exception $e)
         {
              return ResponseFormatter::error($e->getMessage(),'Transaksi Gagal');
