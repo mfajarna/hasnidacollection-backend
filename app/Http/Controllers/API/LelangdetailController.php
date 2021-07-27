@@ -78,11 +78,12 @@ class LelangdetailController extends Controller
         );
     }
 
-    public function getPemenang(Request $request)
+    public function fetch(Request $request)
     {
         $limit = $request->input('limit', 100);
+        $id_lelang = $request->input('id_lelang');
 
-        $lelangDetail = Lelangdetail::with(['lelang','user'])->where('id_users', Auth::user()->id);
+        $lelangDetail = Lelangdetail::with(['lelang','user'])->where('id_lelang', 'like', '%'. $id_lelang . '%');
 
 
         return ResponseFormatter::success(
