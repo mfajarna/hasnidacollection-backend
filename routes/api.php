@@ -45,6 +45,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::post('tukarBarang', [TukarbarangController::class,'create']);
     Route::post('buktiBayar/{id}', [TukarbarangController::class,'updateBuktiPhoto']);
+    Route::get('fetchTukarBarang', [TukarbarangController::class,'all']);
 });
 
 

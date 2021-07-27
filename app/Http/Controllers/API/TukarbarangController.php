@@ -7,6 +7,7 @@ use App\Models\Tukarbarang;
 use Illuminate\Http\Request;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class TukarbarangController extends Controller
@@ -61,5 +62,45 @@ class TukarbarangController extends Controller
             return ResponseFormatter::success([$file],'File successfully uploaded');
         }
 
+    }
+
+    public function all(Request $request)
+    {
+        $id = $request->input('id');
+        $limit = $request->input('limit', 10);
+        $status = $request->input('status');
+
+
+        if($id)
+        {
+            $tukarBarang = Tukarbarang::with(['collection','user'])->find($id);
+
+            if($tukarBarang)
+            {
+                return ResponseFormatter::success(
+                    $tukarBarang,
+                    'Data Transaksi Berhasil Di Ambil'
+                );
+            }else{
+                return ResponseFormatter::error([
+                    null,
+                    'Data Transaksi Tidak Ada',
+                    404
+                ]);
+            }
+        }
+
+        $tukarBarang = Tukarbarang::with(['collection','users'])
+                                    ->where('id_users', Auth::user()->id);
+
+        if($status)
+        {
+            $tukarBarang->where('status', $status);
+        }
+
+        return ResponseFormatter::success(
+            $tukarBarang->paginate($limit),
+            'Data List transaksi Berhasil Di Ambil!'
+        );
     }
 }
