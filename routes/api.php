@@ -32,6 +32,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('pembayaranPhoto/{id}', [TransactionController::class,'updatePhotoPembayaran']);
     Route::get('fetchTransaksi',[TransactionController::class,'fetch']);
     Route::post('checkout', [TransactionController::class, 'checkout']);
+    Route::get('statusTukar', [TransactionController::class,'getStatusTukar']);
 
     Route::post('collection/{id}', [CollectionController::class,'changeStock']);
 

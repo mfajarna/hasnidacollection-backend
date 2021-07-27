@@ -120,6 +120,22 @@ class TransactionController extends Controller
         }
     }
 
+        public function getStatusTukar(Request $request)
+     {
+        $limit = $request->input('limit', 100);
+
+        $transaction = Transaksi::with(['collection','user'])
+                                    ->where('user_id', Auth::user()->id)->whereIn('status', ['DONE'], 'status_tukar_barang', ['NONE']);
+
+
+        return ResponseFormatter::success(
+            $transaction->paginate($limit),
+            'Data List transaksi!'
+        );
+     }
+
+
+
      public function getPastOrders(Request $request)
      {
         $id = $request->input('id');
