@@ -78,9 +78,9 @@ class LelangdetailController extends Controller
         );
     }
 
-    public function getPemenangLelang(Request $request)
+    public function getPemenang(Request $request)
     {
-        $limit = $request->input('limit', 2);
+        $limit = $request->input('limit', 100);
 
         $lelangDetail = Lelangdetail::with(['lelang','user'])->first();
 
