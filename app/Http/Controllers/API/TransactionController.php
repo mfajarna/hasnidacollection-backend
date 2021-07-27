@@ -86,6 +86,7 @@ class TransactionController extends Controller
 
         return ResponseFormatter::success($transaction, 'Transaksi berhasil diubah');
     }
+
      public function checkout(Request $request)
     {
         try {
@@ -119,10 +120,11 @@ class TransactionController extends Controller
 
      public function getPastOrders(Request $request)
      {
-         $id = $request->input('id');
+        $id = $request->input('id');
         $limit = $request->input('limit', 100);
         $collection_id = $request->input('collection_id');
         $status = $request->input('status');
+
 
         if($id)
         {

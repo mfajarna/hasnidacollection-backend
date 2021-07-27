@@ -31,8 +31,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('transaction/{id}', [TransactionController::class,'update']);
     Route::post('pembayaranPhoto/{id}', [TransactionController::class,'updatePhotoPembayaran']);
     Route::get('fetchTransaksi',[TransactionController::class,'fetch']);
-
     Route::post('checkout', [TransactionController::class, 'checkout']);
+
     Route::post('collection/{id}', [CollectionController::class,'changeStock']);
 
     Route::post('lelang', [LelangController::class, 'create']);

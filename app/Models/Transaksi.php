@@ -13,7 +13,7 @@ class Transaksi extends Model
     use HasFactory;
 
     protected $fillable = [
-        'collection_id', 'user_id', 'quantity', 'total', 'status', 'no_resi','no_transaksi','jasa','pembayaranPath'
+        'collection_id', 'user_id', 'quantity', 'total', 'status', 'no_resi','no_transaksi','jasa','pembayaranPath','status_tukar_barang'
     ];
 
     public function collection()
