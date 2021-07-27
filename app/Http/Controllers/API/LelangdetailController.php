@@ -83,7 +83,7 @@ class LelangdetailController extends Controller
 
     public function fetch(Request $request)
     {
-        $limit = $request->input('limit', 100);
+        $limit = $request->input('limit', 1);
         $id_lelang = $request->input('id_lelang');
 
         $lelangDetail = Lelangdetail::with(['lelang','user','collection'])->where('id_lelang', 'like', '%'. $id_lelang . '%')->orderBy('jumlah_bid', 'desc');
