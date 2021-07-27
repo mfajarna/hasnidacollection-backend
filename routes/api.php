@@ -7,6 +7,7 @@ use App\Http\Controllers\API\CollectionController;
 use App\Http\Controllers\API\LelangController;
 use App\Http\Controllers\API\LelangdetailController;
 use App\Http\Controllers\API\TransactionController;
+use App\Http\Controllers\API\TukarbarangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('dataLelang', [LelangdetailController::class,'all']);
     Route::post('prosesLelang', [LelangdetailController::class, 'prosesLelang']);
     Route::get('getPemenang', [LelangDetailController::class, 'getPemenangLelang']);
+
+    Route::post('tukarBarang', [TukarbarangController::class,'create']);
 });
 
 
