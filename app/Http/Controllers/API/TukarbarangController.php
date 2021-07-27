@@ -17,7 +17,7 @@ class TukarbarangController extends Controller
                 'id_collection' => 'required|exists:collections,id',
                 'id_users' => 'required|exists:users,id',
                 'alasan_tukar_barang' => 'required|string',
-                'file' => 'required|image:jpeg,png,jpg|max:2048',
+                'file' => 'image:jpeg,png,jpg|max:2048',
                 'status' => 'required|string'
             ]);
 
