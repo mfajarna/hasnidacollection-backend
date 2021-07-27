@@ -126,7 +126,7 @@ class TransactionController extends Controller
         $limit = $request->input('limit', 100);
         $collection_id = $request->input('collection_id');
         $status = $request->input('status');
-
+        $statusTukar = $request->input('status_tukar_barang');
 
         if($id)
         {
@@ -158,6 +158,11 @@ class TransactionController extends Controller
         if($status)
         {
             $transaction->where('status', $status);
+        }
+
+        if($statusTukar)
+        {
+            $transaction->where('status_tukar_barang', $statusTukar);
         }
 
         return ResponseFormatter::success(
