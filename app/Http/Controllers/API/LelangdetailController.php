@@ -80,9 +80,10 @@ class LelangdetailController extends Controller
 
     public function getPemenangLelang(Request $request)
     {
-        $limit = $request->input('limit', 40);
+        $limit = $request->input('limit', 2);
 
-        $lelangDetail = Lelangdetail::with(['lelang','user'])->orderBy('jumlah_bid', 'asc')->first();
+        $lelangDetail = Lelangdetail::with(['lelang','user'])->first();
+
 
         return ResponseFormatter::success(
             $lelangDetail->paginate($limit),
