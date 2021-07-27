@@ -82,7 +82,7 @@ class LelangdetailController extends Controller
     {
         $limit = $request->input('limit', 100);
 
-        $lelangDetail = Lelangdetail::with(['lelang','user'])->first();
+        $lelangDetail = Lelangdetail::with(['lelang','user'])->where('id_users', Auth::user()->id);
 
 
         return ResponseFormatter::success(
