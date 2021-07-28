@@ -134,6 +134,27 @@ class TransactionController extends Controller
         );
      }
 
+     public function updateStatus(Request $request, $id)
+     {
+        $transaction = Transaksi::findOrFail($id);
+
+        $transaction->status_tukar_barang = $request->status_tukar_barang;
+        $transaction->save();
+
+        if($transaction)
+            {
+                return ResponseFormatter::success(
+                    $transaction,
+                    'Status berhasil diubah'
+                );
+            }else{
+                return ResponseFormatter::error([
+                    null,
+                    'Data Tidak Ada',
+                    404
+                ]);
+            }
+     }
 
 
      public function getPastOrders(Request $request)
