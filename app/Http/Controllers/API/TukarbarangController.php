@@ -53,6 +53,16 @@ class TukarbarangController extends Controller
         );
     }
 
+    public function fetch(Request $request)
+    {
+        $limit = $request->input('limit', 100);
+        $tukarBarang = Tukarbarang::with(['collection','users']);
+
+        return ResponseFormatter::success(
+        $tukarBarang->paginate($limit),
+        'Data List transaksi Berhasil Di Ambil!'
+        );
+    }
 
     public function create(Request $request)
     {
@@ -106,5 +116,26 @@ class TukarbarangController extends Controller
 
     }
 
+     public function updateStatus(Request $request, $id)
+     {
+        $tukarBarang = Tukarbarang::findOrFail($id);
+
+        $tukarBarang->status = $request->status;
+        $tukarBarang->save();
+
+        if($tukarBarang)
+            {
+                return ResponseFormatter::success(
+                    $tukarBarang,
+                    'Status berhasil diubah'
+                );
+            }else{
+                return ResponseFormatter::error([
+                    null,
+                    'Data Tidak Ada',
+                    404
+                ]);
+            }
+     }
 
 }

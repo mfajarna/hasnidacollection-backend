@@ -49,7 +49,10 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::post('tukarBarang', [TukarbarangController::class,'create']);
     Route::post('buktiBayar/{id}', [TukarbarangController::class,'updateBuktiPhoto']);
+    Route::post('statusBarang/{id}', [TukarbarangController::class,'updateStatus']);
     Route::get('fetchBarang', [TukarbarangController::class,'all']);
+    Route::get('allBarang', [TukarbarangController::class,'fetch']);
+
 });
 
 
