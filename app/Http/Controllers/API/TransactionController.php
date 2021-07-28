@@ -125,7 +125,7 @@ class TransactionController extends Controller
         $limit = $request->input('limit', 100);
 
         $transaction = Transaksi::with(['collection','user'])
-                                    ->where('user_id', Auth::user()->id)->whereIn('status', ['DONE'], 'status_tukar_barang', ['NONE']);
+                                    ->where('user_id', Auth::user()->id)->where(['status' => 'DONE', 'status_tukar_barang' => 'NONE']);
 
 
         return ResponseFormatter::success(
