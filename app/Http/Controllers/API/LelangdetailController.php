@@ -42,7 +42,7 @@ class LelangdetailController extends Controller
         $id_lelang = $request->input('id_lelang');
         $limit = $request->input('limit', 1);
 
-        $lelangDetail = Lelangdetail::with(['lelang','users','collection']);
+        $lelangDetail = Lelangdetail::with(['lelang','user','collection']);
 
         if($id_lelang)
         {
