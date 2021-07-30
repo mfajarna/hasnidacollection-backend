@@ -46,6 +46,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('dataLelang', [LelangdetailController::class,'all']);
     Route::post('prosesLelang', [LelangdetailController::class, 'prosesLelang']);
     Route::get('getPemenang', [LelangDetailController::class, 'fetch']);
+    Route::get('lelang-terbesar', [LelangDetailController::class, 'getCountLelang']);
 
     Route::post('tukarBarang', [TukarbarangController::class,'create']);
     Route::post('buktiBayar/{id}', [TukarbarangController::class,'updateBuktiPhoto']);

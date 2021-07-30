@@ -36,6 +36,25 @@ class LelangdetailController extends Controller
             return ResponseFormatter::error($e->getMessage(),'Transaksi Gagal');
         }
     }
+
+    public function getCountLelang(Request $request)
+    {
+        $id_lelang = $request->input('id_lelang');
+        $limit = $request->input('limit', 1);
+
+        $lelangDetail = Lelangdetail::with(['lelang','users','collection']);
+
+        if($id_lelang)
+        {
+            $lelangDetail->where('id_lelang', $id_lelang)->orderBy('jumlah_bid', 'desc')->first();
+        }
+
+        return responseFormatter::success(
+            $lelangDetail->paginate($limit),
+            'Data list lelang Users berhasil diambil'
+        );
+    }
+
     public function all(Request $request)
     {
         $id = $request->input('id');
