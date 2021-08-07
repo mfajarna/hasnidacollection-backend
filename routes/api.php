@@ -6,8 +6,10 @@ use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\CollectionController;
 use App\Http\Controllers\API\LelangController;
 use App\Http\Controllers\API\LelangdetailController;
+use App\Http\Controllers\API\PemenanglelangController;
 use App\Http\Controllers\API\TransactionController;
 use App\Http\Controllers\API\TukarbarangController;
+use App\Models\Pemenanglelang;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +55,10 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('statusBarang/{id}', [TukarbarangController::class,'updateStatus']);
     Route::get('fetchBarang', [TukarbarangController::class,'all']);
     Route::get('allBarang', [TukarbarangController::class,'fetch']);
+
+    Route::get('pemenang-lelang', [PemenanglelangController::class, 'fetch']);
+    Route::post('create-pemenang-lelang', [PemenanglelangController::class,'create']);
+    Route::post('update-photo-pemenang/{id}', [Pemenanglelang::class, 'updatePhotoPembayaran']);
 
 });
 
