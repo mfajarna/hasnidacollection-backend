@@ -32,6 +32,28 @@ class PemenanglelangController extends Controller
         );
     }
 
+     public function updateStatus(Request $request, $id)
+     {
+        $pemenangLelang = Pemenanglelang::findOrFail($id);
+
+        $pemenangLelang->status = $request->status;
+        $pemenangLelang->save();
+
+        if($pemenangLelang)
+            {
+                return ResponseFormatter::success(
+                    $pemenangLelang,
+                    'Status berhasil diubah'
+                );
+            }else{
+                return ResponseFormatter::error([
+                    null,
+                    'Data Tidak Ada',
+                    404
+                ]);
+            }
+     }
+
     public function create(Request $request)
     {
         try{
