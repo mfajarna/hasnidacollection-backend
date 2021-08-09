@@ -60,7 +60,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('create-pemenang-lelang', [PemenanglelangController::class,'create']);
     Route::post('update-photo-pemenang/{id}', [PemenanglelangController::class, 'updatePhotoPembayaran']);
     Route::post('update-status/{id}', [PemenanglelangController::class, 'updateStatus']);
-
+     Route::get('pemenang-lelang-admin', [PemenanglelangController::class, 'all']);
 });
 
 

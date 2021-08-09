@@ -32,6 +32,24 @@ class PemenanglelangController extends Controller
         );
     }
 
+    public function all(Request $request)
+    {
+        $limit = $request->input('limit', 100);
+        $status = $request->input('status');
+
+        $pemenangLelang = Pemenanglelang::with(['user','lelangdetail','collection']);
+
+        if($status)
+        {
+            $pemenangLelang->where('status', $status);
+        }
+
+        return ResponseFormatter::success(
+            $pemenangLelang->paginate($limit),
+                'Data Pemenang Lelang Berhasil Di Ambil!'
+        );
+    }
+
      public function updateStatus(Request $request, $id)
      {
         $pemenangLelang = Pemenanglelang::findOrFail($id);
