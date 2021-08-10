@@ -107,7 +107,7 @@ class CollectionController extends Controller
     {
        try{
          $request->validate([
-                'name' => 'required|max:255|unique:collections',
+                'name' => 'required',
                 'description' => 'required',
                 'stock' => 'required',
                 'price' => 'required',
