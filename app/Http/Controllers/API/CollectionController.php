@@ -7,6 +7,7 @@ use App\Models\Collection;
 use Illuminate\Http\Request;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class CollectionController extends Controller
 {
@@ -132,6 +133,54 @@ class CollectionController extends Controller
        {
            return ResponseFormatter::error($e->getMessage(),'Gagal Input Data');
        }
+    }
+
+    public function updatePhoto(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'file' => 'required|image:jpeg,png,jpg|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return ResponseFormatter::error(['error'=>$validator->errors()], 'Update Photo Fails', 401);
+        }
+
+        if ($request->file('file')) {
+
+            $file = $request->file->store('assets/user', 'public');
+
+            //store your file into database
+
+            $transaksi = Collection::find($id);
+            $transaksi->picturePath = $file;
+            $transaksi->update();
+
+            return ResponseFormatter::success([$file],'File successfully uploaded');
+        }
+    }
+
+        public function updateBarcode(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'file' => 'required|image:jpeg,png,jpg|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return ResponseFormatter::error(['error'=>$validator->errors()], 'Update Photo Fails', 401);
+        }
+
+        if ($request->file('file')) {
+
+            $file = $request->file->store('assets/user', 'public');
+
+            //store your file into database
+
+            $transaksi = Collection::find($id);
+            $transaksi->photoBarcode = $file;
+            $transaksi->update();
+
+            return ResponseFormatter::success([$file],'File successfully uploaded');
+        }
     }
 
 }

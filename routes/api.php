@@ -40,6 +40,10 @@ Route::middleware('auth:sanctum')->group(function(){
 
 
     Route::post('collection/{id}', [CollectionController::class,'changeStock']);
+    Route::post('collection-update-photo/{id}', [CollectionController::class,'updatePhoto']);
+    Route::post('collection-update-barcode/{id}', [CollectionController::class,'updateBarcode']);
+    Route::post('collection-create', [CollectionController::class,'create']);
+
 
     Route::post('lelang', [LelangController::class, 'create']);
     Route::get('fetchLelang', [LelangController::class, 'fetch']);
@@ -60,7 +64,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('create-pemenang-lelang', [PemenanglelangController::class,'create']);
     Route::post('update-photo-pemenang/{id}', [PemenanglelangController::class, 'updatePhotoPembayaran']);
     Route::post('update-status/{id}', [PemenanglelangController::class, 'updateStatus']);
-     Route::get('pemenang-lelang-admin', [PemenanglelangController::class, 'all']);
+    Route::get('pemenang-lelang-admin', [PemenanglelangController::class, 'all']);
 });
 
 
