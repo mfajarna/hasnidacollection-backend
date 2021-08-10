@@ -126,6 +126,8 @@ class CollectionController extends Controller
                 'types' => $request->types,
                 'category' => $request->category,
                 'url_barcode' => $request->url_barcode,
+                'picturePath' => $request->picturePath,
+                'photoBarcode' =>  $request->photoBarcode
            ]);
 
            return ResponseFormatter::success($collection, 'Berhasil input data');
