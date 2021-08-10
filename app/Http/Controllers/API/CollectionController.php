@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Helpers\ResponseFormatter;
+use Exception;
 use App\Models\Collection;
 use Illuminate\Http\Request;
+use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 
 class CollectionController extends Controller
@@ -99,6 +100,38 @@ class CollectionController extends Controller
                     404
                 ]);
             }
+    }
+
+    public function create(Request $request)
+    {
+       try{
+          $data =  $request->validate([
+                'name' => 'required|max:255|unique:collections',
+                'description' => 'required',
+                'stock' => 'required|integer',
+                'price' => 'required|integer',
+                'rate' => 'required|numeric',
+                'types' => 'required',
+                'category' => 'required',
+                'url_barcode' => 'required'
+           ]);
+
+           $collection = Collection::create([
+                'name' => $data['name'],
+                'description' => $data['description'],
+                'stock' => $data['stock'],
+                'price' => $data['price'],
+                'rate' => $data['rate'],
+                'types' => $data['types'],
+                'category' => $data['category'],
+                'url_barcode' => $data['url_barcode']
+           ]);
+
+           return ResponseFormatter::success($collection, 'Berhasil input data');
+       }catch(Exception $e)
+       {
+           return ResponseFormatter::error($e->getMessage(),'Gagal Input Data');
+       }
     }
 
 }

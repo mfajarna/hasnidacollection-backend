@@ -47,6 +47,8 @@ class TukarbarangController extends Controller
             $tukarBarang->where('status', $status);
         }
 
+
+
         return ResponseFormatter::success(
             $tukarBarang->paginate($limit),
             'Data List transaksi Berhasil Di Ambil!'
@@ -56,7 +58,13 @@ class TukarbarangController extends Controller
     public function fetch(Request $request)
     {
         $limit = $request->input('limit', 100);
+        $status = $request->input('status');
         $tukarBarang = Tukarbarang::with(['collection','users']);
+
+            if($status)
+        {
+            $tukarBarang->where('status', $status);
+        }
 
         return ResponseFormatter::success(
         $tukarBarang->paginate($limit),
