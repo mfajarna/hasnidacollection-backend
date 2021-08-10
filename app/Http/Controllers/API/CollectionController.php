@@ -109,9 +109,9 @@ class CollectionController extends Controller
          $request->validate([
                 'name' => 'required|unique:collections',
                 'description' => 'required',
-                'stock' => 'required',
-                'price' => 'required',
-                'rate' => 'required',
+                'stock' => 'required|integer',
+                'price' => 'required|integer',
+                'rate' => 'required|numeric',
                 'types' => 'required',
                 'category' => 'required',
                 'url_barcode' => 'required'
