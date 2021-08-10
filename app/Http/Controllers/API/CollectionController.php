@@ -106,7 +106,7 @@ class CollectionController extends Controller
     public function create(Request $request)
     {
        try{
-          $data =  $request->validate([
+         $request->validate([
                 'name' => 'required|max:255|unique:collections',
                 'description' => 'required',
                 'stock' => 'required',
@@ -118,14 +118,14 @@ class CollectionController extends Controller
            ]);
 
            $collection = Collection::create([
-                'name' => $data['name'],
-                'description' => $data['description'],
-                'stock' => $data['stock'],
-                'price' => $data['price'],
-                'rate' => $data['rate'],
-                'types' => $data['types'],
-                'category' => $data['category'],
-                'url_barcode' => $data['url_barcode']
+                'name' => $request->name,
+                'description' => $request->description,
+                'stock' => $request->stock,
+                'price' => $request->price,
+                'rate' => $request->rate,
+                'types' => $request->types,
+                'category' => $request->category,
+                'url_barcode' => $request->url_barcode,
            ]);
 
            return ResponseFormatter::success($collection, 'Berhasil input data');
