@@ -56,7 +56,7 @@ class CollectionController extends Controller
         }
         if($category)
         {
-            $collection->where('category', 'like', '%'. $category . '%');
+            $collection->where('category', 'like', '%'. $category . '%')->orderBy('created_at', 'DESC')->first();
         }
         if($price_from)
         {
