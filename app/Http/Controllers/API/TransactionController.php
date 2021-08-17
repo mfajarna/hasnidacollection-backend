@@ -256,10 +256,10 @@ class TransactionController extends Controller
 
 
 
-        return ResponseFormatter::success(
-            $transaction->paginate($limit),
-            'Data List transaksi!'
-        );
+        // return ResponseFormatter::success(
+        //     $transaction->paginate($limit),
+        //     'Data List transaksi!'
+        // );
 
         return ResponseFormatter::success($transaction,'File successfully');
      }
@@ -284,7 +284,7 @@ class TransactionController extends Controller
 
      public function fetchItem(Request $request)
      {
-         $limit = $request->input('limit', 100);
+        $limit = $request->input('limit', 100);
          $month = $request->input('month');
 
           $now = Carbon::now();
