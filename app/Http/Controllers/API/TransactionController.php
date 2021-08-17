@@ -241,7 +241,7 @@ class TransactionController extends Controller
           $limit = $request->input('limit', 100);
 
           $transaction = Transaksi::with(['collection'])
-                                    ->where('status','DONE')->first();
+                                    ->where('status','DONE');
 
           $now = Carbon::now();
 
