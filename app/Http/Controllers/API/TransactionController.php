@@ -239,8 +239,8 @@ class TransactionController extends Controller
      {
           $limit = $request->input('limit', 100);
 
-          $transaction = Transaksi::with(['collection','user'])
-                                    ->where('user_id', Auth::user()->id)->sum('total')->whereIn('status', ['DONE']);
+          $transaction = Transaksi::with(['collection'])
+                                    ->sum('total');
 
 
         return ResponseFormatter::success(
