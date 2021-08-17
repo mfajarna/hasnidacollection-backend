@@ -240,10 +240,10 @@ class TransactionController extends Controller
           $limit = $request->input('limit', 100);
 
           $transaction = Transaksi::with(['collection'])
-                                    ->sum('total');
+                                    ->sum('total')->where('status','DONE');
 
 
-       return ResponseFormatter::success($transaction,'File successfully uploaded');
+       return ResponseFormatter::success($transaction,'File successfully');
      }
 
 }
