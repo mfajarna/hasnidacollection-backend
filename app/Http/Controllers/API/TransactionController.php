@@ -240,15 +240,14 @@ class TransactionController extends Controller
      {
           $limit = $request->input('limit', 100);
           $month = $request->input('month');
-          $year = $request->input('year');
 
           $now = Carbon::now();
-
+          $year = $now->year;
 
         //   $transaction = Transaksi::with(['collection'])
         //                             ->where('status','DONE')->sum('total');
 
-                  $transaction = Transaksi::with(['collection'])
+            $transaction = Transaksi::with(['collection'])
                                     ->whereMonth('created_at', '=' , $month)
                                     ->whereYear('created_at', '=', $year)
                                     ->where('status','DONE')
