@@ -292,7 +292,7 @@ class TransactionController extends Controller
                      $transaction = Transaksi::with(['collection'])
                                     ->whereMonth('created_at', '=' , $month)
                                     ->whereYear('created_at', '=', $year)
-                                    ->where('status','DONE');
+                                    ->where('status','DONE')->get();
 
 
         return ResponseFormatter::success($transaction,'File successfully');
