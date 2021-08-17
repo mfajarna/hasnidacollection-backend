@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\Transaksi;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -242,8 +243,11 @@ class TransactionController extends Controller
           $transaction = Transaksi::with(['collection'])
                                     ->sum('total')->where('status','DONE');
 
+          $now = Carbon::now();
 
-       return ResponseFormatter::success($transaction,'File successfully');
+
+
+       return ResponseFormatter::success($now->month,'File successfully');
      }
 
 }
