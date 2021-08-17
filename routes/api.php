@@ -69,6 +69,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::get('fetch-rekap', [TransactionController::class,'fetchRekap']);
     Route::get('fetch-quantity', [TransactionController::class,'fetchQuantity']);
+    Route::get('fetch-item', [TransactionController::class,'fetchItem']);
 });
 
 

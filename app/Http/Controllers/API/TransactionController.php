@@ -282,4 +282,20 @@ class TransactionController extends Controller
         return ResponseFormatter::success($transaction,'File successfully');
      }
 
+     public function fetchItem(Request $request)
+     {
+
+         $month = $request->input('month');
+
+          $now = Carbon::now();
+          $year = $now->year;
+                     $transaction = Transaksi::with(['collection'])
+                                    ->whereMonth('created_at', '=' , $month)
+                                    ->whereYear('created_at', '=', $year)
+                                    ->where('status','DONE');
+
+
+        return ResponseFormatter::success($transaction,'File successfully');
+     }
+
 }
