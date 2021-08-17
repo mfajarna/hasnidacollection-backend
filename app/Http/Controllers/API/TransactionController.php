@@ -247,7 +247,10 @@ class TransactionController extends Controller
 
 
 
-       return ResponseFormatter::success($transaction,'File successfully');
+        return ResponseFormatter::success(
+            $transaction->paginate($limit),
+            'Data List transaksi!'
+        );
      }
 
 }
