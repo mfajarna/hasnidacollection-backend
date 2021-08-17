@@ -243,10 +243,7 @@ class TransactionController extends Controller
                                     ->sum('total');
 
 
-        return ResponseFormatter::success(
-            $transaction->paginate($limit),
-            'Data List transaksi!'
-        );
+       return ResponseFormatter::success($transaction,'File successfully uploaded');
      }
 
 }
