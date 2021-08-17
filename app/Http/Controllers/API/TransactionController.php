@@ -241,13 +241,13 @@ class TransactionController extends Controller
           $limit = $request->input('limit', 100);
 
           $transaction = Transaksi::with(['collection'])
-                                    ->sum('total')->whereIn('status','DONE');
+                                    ->sum('total')->where('status','DONE')->first();
 
           $now = Carbon::now();
 
 
 
-       return ResponseFormatter::success([$transaction],'File successfully');
+       return ResponseFormatter::success($transaction,'File successfully');
      }
 
 }
