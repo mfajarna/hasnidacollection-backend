@@ -264,4 +264,22 @@ class TransactionController extends Controller
         return ResponseFormatter::success($transaction,'File successfully');
      }
 
+
+     // sum quantity product in Collections table's
+     public function fetchQuantity(Request $request)
+     {
+
+         $month = $request->input('month');
+
+          $now = Carbon::now();
+          $year = $now->year;
+                     $transaction = Transaksi::with(['collection'])
+                                    ->whereMonth('created_at', '=' , $month)
+                                    ->whereYear('created_at', '=', $year)
+                                    ->where('status','DONE')
+                                    ->sum('quantity');
+
+        return ResponseFormatter::success($transaction,'File successfully');
+     }
+
 }
