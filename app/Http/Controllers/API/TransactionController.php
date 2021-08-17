@@ -250,7 +250,7 @@ class TransactionController extends Controller
                                     ->whereMonth('created_at', '=' , $month)
                                     ->whereYear('created_at', '=', $year)
                                     ->where('status','DONE')
-                                    ->sum('total')->get();
+                                    ->sum('total');
 
 
 
