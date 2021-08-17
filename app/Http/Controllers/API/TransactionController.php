@@ -239,20 +239,26 @@ class TransactionController extends Controller
      public function fetchRekap(Request $request)
      {
           $limit = $request->input('limit', 100);
-
-          $transaction = Transaksi::with(['collection'])
-                                    ->where('status','DONE')->sum('total');
-
           $now = Carbon::now();
+          $month = $now->month;
+          $year = $now->year;
+
+        //   $transaction = Transaksi::with(['collection'])
+        //                             ->where('status','DONE')->sum('total');
+
+                  $transaction = Transaksi::with(['collection'])
+                                    ->whereMonth('created_at', '=' , $month)
+                                    ->whereYear('created_at', '=', $year)->get();
 
 
 
-        // return ResponseFormatter::success(
-        //     $transaction->paginate($limit),
-        //     'Data List transaksi!'
-        // );
 
-        return ResponseFormatter::success($transaction,'File successfully');
+        return ResponseFormatter::success(
+            $transaction->paginate($limit),
+            'Data List transaksi!'
+        );
+
+        // return ResponseFormatter::success($transaction,'File successfully');
      }
 
 }
