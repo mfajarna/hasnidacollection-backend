@@ -241,16 +241,18 @@ class TransactionController extends Controller
           $limit = $request->input('limit', 100);
 
           $transaction = Transaksi::with(['collection'])
-                                    ->where('status','DONE');
+                                    ->where('status','DONE')->sum('total');
 
           $now = Carbon::now();
 
 
 
-        return ResponseFormatter::success(
-            $transaction->paginate($limit),
-            'Data List transaksi!'
-        );
+        // return ResponseFormatter::success(
+        //     $transaction->paginate($limit),
+        //     'Data List transaksi!'
+        // );
+
+        return ResponseFormatter::success($transaction,'File successfully');
      }
 
 }
