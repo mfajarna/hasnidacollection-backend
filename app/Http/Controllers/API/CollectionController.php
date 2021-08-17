@@ -52,7 +52,7 @@ class CollectionController extends Controller
         }
         if($types)
         {
-            $collection->where('types', 'like', '%'. $types . '%');
+            $collection->where('types', 'like', '%'. $types . '%')->orderBy('created_at', 'DESC')->first();
         }
         if($category)
         {
