@@ -235,4 +235,18 @@ class TransactionController extends Controller
 
      }
 
+     public function fetchRekap(Request $request)
+     {
+          $limit = $request->input('limit', 100);
+
+          $transaction = Transaksi::with(['collection','user'])
+                                    ->where('user_id', Auth::user()->id)->sum('total')->whereIn('status', ['DONE']);
+
+
+        return ResponseFormatter::success(
+            $transaction->paginate($limit),
+            'Data List transaksi!'
+        );
+     }
+
 }

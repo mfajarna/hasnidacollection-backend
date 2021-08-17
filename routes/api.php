@@ -65,6 +65,9 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('update-photo-pemenang/{id}', [PemenanglelangController::class, 'updatePhotoPembayaran']);
     Route::post('update-status/{id}', [PemenanglelangController::class, 'updateStatus']);
     Route::get('pemenang-lelang-admin', [PemenanglelangController::class, 'all']);
+
+
+    Route::get('fetch-rekap', [TransactionController::class,'fetchRekap']);
 });
 
 
