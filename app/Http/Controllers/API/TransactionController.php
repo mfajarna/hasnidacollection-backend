@@ -248,7 +248,7 @@ class TransactionController extends Controller
 
                   $transaction = Transaksi::with(['collection'])
                                     ->whereMonth('created_at', '=' , $month)
-                                    ->whereYear('created_at', '=', $year)->get();
+                                    ->whereYear('created_at', '=', 2019)->get();
 
 
 
