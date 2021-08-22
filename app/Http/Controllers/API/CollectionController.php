@@ -81,6 +81,7 @@ class CollectionController extends Controller
         );
     }
 
+
     public function changeStock(Request $request, $id)
     {
         $collection = Collection::findOrFail($id);
@@ -190,6 +191,50 @@ class CollectionController extends Controller
         $collection = Collection::findOrFail($id);
 
         $collection->rate = $request->rate;
+        $collection->save();
+
+            if($collection)
+            {
+                return ResponseFormatter::success(
+                    $collection,
+                    'Rate berhasil diubah'
+                );
+            }else{
+                return ResponseFormatter::error([
+                    null,
+                    'Data Produk Tidak Ada',
+                    404
+                ]);
+            }
+    }
+
+    public function updatePerhitunganAkhir(Request $request, $id)
+    {
+        $collection = Collection::findOrFail($id);
+
+        $collection->perhitungan_akhir = $request->perhitungan_akhir;
+        $collection->save();
+
+            if($collection)
+            {
+                return ResponseFormatter::success(
+                    $collection,
+                    'Rate berhasil diubah'
+                );
+            }else{
+                return ResponseFormatter::error([
+                    null,
+                    'Data Produk Tidak Ada',
+                    404
+                ]);
+            }
+    }
+
+    public function updateTotalJumlahOrder(Request $request, $id)
+    {
+        $collection = Collection::findOrFail($id);
+
+        $collection->updateTotalJumlahOrder = $request->updateTotalJumlahOrder;
         $collection->save();
 
             if($collection)
