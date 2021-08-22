@@ -185,4 +185,26 @@ class CollectionController extends Controller
         }
     }
 
+    public function updateRating(Request $request, $id)
+    {
+        $collection = Collection::findOrFail($id);
+
+        $collection->rate = $request->rate;
+        $collection->save();
+
+            if($collection)
+            {
+                return ResponseFormatter::success(
+                    $collection,
+                    'Rate berhasil diubah'
+                );
+            }else{
+                return ResponseFormatter::error([
+                    null,
+                    'Data Produk Tidak Ada',
+                    404
+                ]);
+            }
+    }
+
 }

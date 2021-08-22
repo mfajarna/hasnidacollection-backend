@@ -43,6 +43,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('collection-update-photo/{id}', [CollectionController::class,'updatePhoto']);
     Route::post('collection-update-barcode/{id}', [CollectionController::class,'updateBarcode']);
     Route::post('collection-create', [CollectionController::class,'create']);
+    Route::post('collection-rate/{id}', [CollectionController::class,'updateRating']);
 
 
     Route::post('lelang', [LelangController::class, 'create']);
