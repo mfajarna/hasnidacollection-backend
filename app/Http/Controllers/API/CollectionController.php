@@ -234,7 +234,7 @@ class CollectionController extends Controller
     {
         $collection = Collection::findOrFail($id);
 
-        $collection->updateTotalJumlahOrder = $request->updateTotalJumlahOrder;
+        $collection->total_jumlah_order = $request->total_jumlah_order;
         $collection->save();
 
             if($collection)

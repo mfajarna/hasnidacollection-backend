@@ -13,7 +13,7 @@ class Collection extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable =[
-        'name','description','stock', 'price', 'rate', 'types', 'category','picturePath','url_barcode','photoBarcode'
+        'name','description','stock', 'price', 'rate', 'types', 'category','picturePath','url_barcode','photoBarcode','perhitungan_akhir','total_jumlah_order'
     ];
 
     public function getCreatedAtAttribute($value)
