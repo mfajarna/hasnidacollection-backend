@@ -29,7 +29,6 @@ class CollectionRequest extends FormRequest
             'description' => 'required',
             'stock' => 'required',
             'price' => 'required|integer',
-            'rate' => 'required|numeric',
             'types' => 'required|string|in:Recommended,Popular,New Collection',
             'category' => 'required|string|max:255|in:HIJAB,PAKAIAN,HEELS,TAS,BEAUTY'
         ];
